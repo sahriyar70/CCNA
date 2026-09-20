@@ -1196,4 +1196,3 @@ Network Security
 15. Network Security
 ```
 
-> **Note:** এই README-টি শেখার নোট হিসেবে তৈরি। Cisco/CCNA-level networking শেখার সময় subnetting, routing, VLAN, ACL, DHCP, NAT এবং IPv6-এর সাথে hands-on lab practice করলে concepts অনেক বেশি পরিষ্কার হবে।
