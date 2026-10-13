@@ -1,4 +1,4 @@
-# 🌐 EtherChannel & Link Aggregation — Complete Networking Notes
+#  EtherChannel & Link Aggregation — Complete Networking Notes
 
 **Topics:** CCNA, Cisco Switch Configuration, LACP, PAgP, Network Redundancy, Troubleshooting
 
