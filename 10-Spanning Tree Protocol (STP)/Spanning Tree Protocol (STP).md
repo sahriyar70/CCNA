@@ -1032,16 +1032,16 @@ SW1(config-if)# no shutdown
 
 # 23. Security Best Practices
 
-1. Network topology document করে রাখবে।
-2. Root Bridge নির্ধারিত ও নিয়ন্ত্রিত রাখবে।
-3. End-device-facing port-এ প্রয়োজন অনুযায়ী PortFast এবং BPDU Guard ব্যবহার করবে।
-4. উপযুক্ত uplink-এ Root Guard ব্যবহার করবে।
-5. প্রয়োজন অনুযায়ী Loop Guard ও অন্যান্য protection feature configure করবে।
-6. Unused switch ports disable রাখবে।
-7. Unauthorized physical switch connection প্রতিরোধ করবে।
-8. STP topology changes ও MAC flapping monitor করবে।
-9. Running configuration backup রাখবে।
-10. Production network-এ পরিবর্তনের আগে approval ও rollback plan রাখবে।
+1. Network topology document করে রাখা।
+2. Root Bridge নির্ধারিত ও নিয়ন্ত্রিত রাখা।
+3. End-device-facing port-এ প্রয়োজন অনুযায়ী PortFast এবং BPDU Guard ব্যবহার করা।
+4. উপযুক্ত uplink-এ Root Guard ব্যবহার করা।
+5. প্রয়োজন অনুযায়ী Loop Guard ও অন্যান্য protection feature configure করা।
+6. Unused switch ports disable রাখা।
+7. Unauthorized physical switch connection প্রতিরোধ করা।
+8. STP topology changes ও MAC flapping monitor করা।
+9. Running configuration backup রাখা।
+10. Production network-এ পরিবর্তনের আগে approval ও rollback plan রাখা।
 
 ### Security Reminder
 
@@ -1187,7 +1187,7 @@ copy running-config startup-config
 | MSTP            | একাধিক VLAN-কে spanning-tree instance-এ map করার protocol                |
 | Convergence     | Topology পরিবর্তনের পর network-এর নতুন স্থিতিশীল অবস্থায় পৌঁছানো         |
 
-## 🧠 Memory Tricks
+##  Memory Tricks
 
 * **STP:** Switch loop থামায়।
 * **Root Bridge:** Reference switch।
