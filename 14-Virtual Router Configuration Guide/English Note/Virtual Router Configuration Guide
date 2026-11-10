@@ -1,0 +1,159 @@
+# FHRP, HSRP, VRRP & GLBP – Virtual Router Configuration Guide
+
+## 1. FHRP (First Hop Redundancy Protocol)
+
+**What is FHRP?**
+
+FHRP is a group of network protocols that provides High Availability for the Default Gateway.
+
+Normally, devices in a LAN use a single Router as their Default Gateway. If that Router fails, communication with other networks may stop.
+
+FHRP solves this problem by providing Gateway Redundancy.
+
+**How Does It Work?**
+
+- Multiple Physical Routers work together.
+- They create a Virtual IP Address.
+- LAN devices use this Virtual IP as their Default Gateway.
+- If the Active Router fails, another Router takes over.
+
+### Main FHRP Protocols
+
+| Protocol | Full Form | Main Feature |
+|---|---|---|
+| HSRP | Hot Standby Router Protocol | Active and Standby Router |
+| VRRP | Virtual Router Redundancy Protocol | Master and Backup Router |
+| GLBP | Gateway Load Balancing Protocol | Load Balancing and Redundancy |
+
+---
+
+## 2. HSRP (Hot Standby Router Protocol)
+
+HSRP is a Cisco proprietary FHRP protocol. It elects one Router as Active and another as Standby.
+
+**How Does It Work?**
+
+- Active Router: Forwards network traffic.
+- Standby Router: Waits for the Active Router to fail.
+- Virtual IP: Works as the Default Gateway for all Clients.
+- If the Active Router fails, the Standby Router takes over.
+
+### HSRP Configuration (Cisco)
+
+Example:
+
+- Router 1: `192.168.10.2`
+- Router 2: `192.168.10.3`
+- Virtual IP: `192.168.10.1`
+
+**Router 1 (Active):**
+
+```bash
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.2 255.255.255.0
+standby 1 ip 192.168.10.1
+standby 1 priority 110
+standby 1 preempt
+no shutdown
+```
+
+**Router 2 (Standby):**
+
+```bash
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.3 255.255.255.0
+standby 1 ip 192.168.10.1
+standby 1 priority 100
+standby 1 preempt
+no shutdown
+```
+
+**Verification Commands:**
+
+```bash
+show standby
+show standby brief
+```
+
+---
+
+## 3. VRRP (Virtual Router Redundancy Protocol)
+
+VRRP is an Open Standard FHRP protocol. It works similarly to HSRP but supports multi-vendor environments.
+
+**How Does It Work?**
+
+- Master Router: Forwards network traffic.
+- Backup Router: Waits for the Master Router to fail.
+- Virtual IP: Works as the Default Gateway for Clients.
+- If the Master Router fails, a Backup Router takes over.
+
+### VRRP Configuration (Cisco)
+
+**Router 1 (Master):**
+
+```bash
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.2 255.255.255.0
+vrrp 1 ip 192.168.10.1
+vrrp 1 priority 110
+vrrp 1 preempt
+no shutdown
+```
+
+**Router 2 (Backup):**
+
+```bash
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.3 255.255.255.0
+vrrp 1 ip 192.168.10.1
+vrrp 1 priority 100
+vrrp 1 preempt
+no shutdown
+```
+
+**Verification Commands:**
+
+```bash
+show vrrp
+show vrrp brief
+```
+
+---
+
+## 4. GLBP (Gateway Load Balancing Protocol)
+
+GLBP is a Cisco proprietary FHRP protocol. It provides both Gateway Redundancy and Load Balancing.
+
+Unlike HSRP and VRRP, where normally one Router forwards traffic, GLBP allows multiple Routers to forward traffic simultaneously.
+
+**How Does It Work?**
+
+- AVG (Active Virtual Gateway): Manages the Virtual Gateway.
+- AVF (Active Virtual Forwarder): Forwards Client traffic.
+- Multiple Routers share the traffic load.
+- If one Router fails, another Router can continue forwarding traffic.
+
+### GLBP Configuration (Cisco)
+
+**Router 1:**
+
+```bash
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.2 255.255.255.0
+glbp 1 ip 192
